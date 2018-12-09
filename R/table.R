@@ -300,6 +300,7 @@ setMethod("dbReadTable", c("SQLiteConnection", "character"),
     name <- dbQuoteIdentifier(conn, name)
     out <- dbGetQuery(conn, paste("SELECT", select.cols, "FROM", name),
                       row.names = row.names)
+    Encoding(names(out)) <- "UTF-8"
 
     if (check.names) {
       names(out) <- make.names(names(out), unique = TRUE)
@@ -392,7 +393,9 @@ setMethod("dbListFields", c("SQLiteConnection", "character"),
                                   dbQuoteIdentifier(conn, name), "LIMIT 0"))
     on.exit(dbClearResult(rs))
 
-    names(dbFetch(rs, n = 0, row.names = FALSE))
+    . <- names(dbFetch(rs, n = 0, row.names = FALSE))
+    Encoding(.) <- "UTF-8"
+    .
   }
 )
 
