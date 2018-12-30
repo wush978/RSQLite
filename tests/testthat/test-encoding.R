@@ -11,7 +11,6 @@ test_that("write tables whose colnames or contents are BIG5 encoded", {
   })
 
   . <- rawToChar(as.raw(c(0xa4, 0xa4, 0xa4, 0xe5)))
-  Encoding(.) <- "BIG5"
   df <- structure(
     list(V1 = 1:3),
     class = "data.frame",
