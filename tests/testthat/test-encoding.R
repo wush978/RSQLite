@@ -12,7 +12,8 @@ test_that("write a table whose colnames is BIG5 encoded", {
   colnames(df) <- .
   dbWriteTable(con, "a", df)
   res <- dbReadTable(con, "a")
-
+  print(str(head(res)))
+  print(str(head(df)))
   expect_identical(res, df)
 })
 
